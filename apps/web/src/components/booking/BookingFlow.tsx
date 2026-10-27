@@ -149,7 +149,7 @@ export function BookingFlow() {
         <p className="mt-1 text-ink-soft">Your reference is <strong className="text-ink">{confirmation.reference}</strong>. A confirmation is on its way to {contact.email}.</p>
         <div className="mt-6 flex flex-wrap gap-3">
           <a href={ics} className="btn-primary"><CalendarPlus className="size-5" aria-hidden /> Add to my calendar</a>
-          <Link href="/" className="btn-quiet">Back to home</Link>
+          <Link href={`/booking/${confirmation.manageToken}`} className="btn-quiet">Change or cancel</Link>
         </div>
         <div className="mt-8 rounded-lg bg-linen p-5">
           <h3 className="text-xl">What to have ready</h3>

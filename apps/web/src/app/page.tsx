@@ -26,7 +26,7 @@ export default function Home() {
     <>
       {/* Hero: the one bold moment. A real family photo with an advocate's case note on top. */}
       <section className="relative overflow-hidden bg-forest-800 text-white">
-        <div className="wrap grid gap-12 pb-20 pt-14 lg:grid-cols-[1fr_1.05fr] lg:items-center lg:pb-28 lg:pt-20">
+        <div className="wrap grid gap-12 pb-20 pt-14 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:pb-28 lg:pt-20">
           <div>
             <h1 className="text-[2.9rem] leading-[1.05] text-white sm:text-7xl">Your health, our guidance.</h1>
             <p className="measure mt-6 text-xl text-forest-200">
@@ -83,7 +83,7 @@ export default function Home() {
 
       <section className="mt-28 bg-linen py-20" aria-labelledby="how-h">
         <div className="wrap grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-center">
-          <Photo photo={photos.kitchenTable} position="50% 75%" className="aspect-[4/5] rounded-tr-[4rem] rounded-bl-[4rem]" />
+          <Photo photo={photos.kitchenTable} position="50% 95%" className="aspect-[4/5] rounded-tr-[4rem] rounded-bl-[4rem]" />
           <div>
             <h2 id="how-h" className="text-4xl sm:text-5xl">How it works</h2>
             <ol className="mt-8 space-y-8">
