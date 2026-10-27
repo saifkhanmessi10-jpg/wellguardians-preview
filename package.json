@@ -1,0 +1,20 @@
+{
+  "name": "wellguardians-platform",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspaces --if-present",
+    "dev:web": "npm run dev -w @wg/web",
+    "dev:api": "npm run dev -w @wg/api",
+    "build": "npm run build -w @wg/shared && npm run build -w @wg/api && npm run build -w @wg/web",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present"
+  },
+  "engines": {
+    "node": ">=20.11"
+  }
+}

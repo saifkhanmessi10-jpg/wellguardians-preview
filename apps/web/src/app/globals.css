@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+/*
+ * WellGuardians brand tokens.
+ * Forest, linen and marigold are sampled from the current wellguardians.com
+ * Elementor globals (#205044, #F4F1E9, #FEC42D). Everything else is derived.
+ */
+@theme {
+  --color-forest-950: #0f2620;
+  --color-forest-900: #163a31;
+  --color-forest-800: #205044; /* brand */
+  --color-forest-600: #2f6b5c;
+  --color-forest-200: #c4dbd3;
+  --color-forest-50: #eef5f2;
+
+  --color-linen: #f4f1e9; /* brand */
+  --color-paper: #fbfaf6;
+  --color-marigold: #fec42d; /* brand — fills and focus only, never text on light */
+  --color-marigold-700: #8a6200; /* text-safe on paper (5.6:1) */
+
+  --color-ink: #1c2622;
+  --color-ink-soft: #4a5752;
+  --color-line: #d9d4c7;
+  --color-alert: #a6321f;
+  --color-ok: #1f6b3d;
+
+  --font-display: var(--font-newsreader), Georgia, serif;
+  --font-sans: var(--font-public-sans), system-ui, sans-serif;
+
+  --radius-tab: 0.375rem;
+}
+
+@layer base {
+  html {
+    font-size: 112.5%; /* 18px base: many readers are older caregivers */
+    scroll-padding-top: 6rem; /* WCAG 2.4.11: sticky header never hides focus */
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+    line-height: 1.6;
+  }
+  h1, h2, h3 {
+    @apply font-display text-forest-900;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  :focus-visible {
+    outline: 3px solid var(--color-marigold);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  }
+}
+
+/* Custom utilities (Tailwind v4 @utility so they compose with variants like sm: and hover:). */
+@utility wrap { @apply mx-auto w-full max-w-6xl px-5 sm:px-8; }
+@utility measure { max-width: 66ch; }
+
+@utility btn-primary { @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 py-2 text-center leading-snug text-[0.95rem] font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50 bg-forest-800 text-white hover:bg-forest-900; }
+@utility btn-gold { @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 py-2 text-center leading-snug text-[0.95rem] font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50 bg-marigold text-forest-950 hover:bg-[#f0b512]; }
+@utility btn-quiet { @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 py-2 text-center leading-snug text-[0.95rem] font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50 border border-forest-800/30 text-forest-800 hover:border-forest-800 hover:bg-forest-50; }
+@utility btn-on-dark { @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 py-2 text-center leading-snug text-[0.95rem] font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50 border border-white/40 text-white hover:bg-white/10; }
+
+@utility field-label { @apply mb-1.5 block text-[0.9rem] font-semibold text-ink; }
+@utility field {
+  @apply block w-full rounded-md border border-[#a9a395] bg-white px-3.5 py-3 text-base text-ink placeholder:text-ink-soft/70;
+  @apply focus:border-forest-800 focus:outline-none focus:ring-2 focus:ring-marigold aria-invalid:border-alert;
+}
+@utility field-error { @apply mt-1.5 text-[0.85rem] font-medium text-alert; }
+
+@layer components {
+  .prose-wg { max-width: 66ch; color: var(--color-ink-soft); }
+  .prose-wg p { margin-bottom: 1rem; }
+  .prose-wg h2 { margin: 2.5rem 0 0.75rem; font-size: 1.875rem; }
+  .prose-wg h3 { margin: 2rem 0 0.5rem; font-size: 1.25rem; }
+  .prose-wg ul { margin-bottom: 1rem; list-style: disc; padding-left: 1.25rem; }
+  .prose-wg li { margin-bottom: 0.375rem; }
+}

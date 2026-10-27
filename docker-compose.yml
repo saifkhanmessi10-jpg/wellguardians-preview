@@ -1,0 +1,29 @@
+# Local development stack: `docker compose up` then open http://localhost:3000
+services:
+  mongo:
+    image: mongo:8
+    command: ["--replSet", "rs0", "--bind_ip_all"]
+    ports: ["27017:27017"]
+    volumes: [mongo-data:/data/db]
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "try { rs.status().ok } catch (e) { rs.initiate({_id:'rs0',members:[{_id:0,host:'mongo:27017'}]}).ok }"]
+      interval: 5s
+      retries: 20
+
+  api:
+    build: { context: ., dockerfile: apps/api/Dockerfile }
+    environment:
+      MONGODB_URI: mongodb://mongo:27017/wellguardians?replicaSet=rs0
+      CORS_ORIGINS: http://localhost:3000
+    ports: ["4000:4000"]
+    depends_on: { mongo: { condition: service_healthy } }
+
+  web:
+    build: { context: ., dockerfile: apps/web/Dockerfile }
+    environment:
+      API_ORIGIN: http://api:4000
+    ports: ["3000:3000"]
+    depends_on: [api]
+
+volumes:
+  mongo-data:
